@@ -1,7 +1,6 @@
 name: Actualizar datos AIS
 
 on:
-  schedule:
   workflow_dispatch: {}  # permite correrlo manualmente desde la pestaña Actions
 
 permissions:
