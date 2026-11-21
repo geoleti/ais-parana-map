@@ -552,6 +552,15 @@
 
   function decodeCoord(v) { return v / ESCALA; }
 
+  // Descarta las posiciones AIS sin coordenadas geograficas validas.
+  function coordenadasAISValidas(x, y) {
+    if (typeof x !== "number" || typeof y !== "number") return false;
+    const lat = decodeCoord(y);
+    const lon = decodeCoord(x);
+    return Number.isFinite(lat) && Number.isFinite(lon)
+      && lat >= -55 && lat <= -20 && lon >= -75 && lon <= -50;
+  }
+
   // Haversine: distancia real en metros, misma formula que usa el backend
   const RADIO_TIERRA_M = 6371000;
   function haversineM(lat1, lon1, lat2, lon2) {
@@ -718,7 +727,7 @@
     Object.entries(zonas || {}).forEach(([nombreZona, dataZona]) => {
       const tgts = (dataZona && dataZona.tgts) || {};
       Object.entries(tgts).forEach(([mmsi, tgt]) => {
-        if (typeof tgt.x !== "number" || typeof tgt.y !== "number") return;
+        if (!coordenadasAISValidas(tgt.x, tgt.y)) return;
         const edadNueva = tgt.a ?? Infinity;
         const existente = combinados[mmsi];
         const edadExistente = existente ? (existente.a ?? Infinity) : Infinity;
@@ -889,7 +898,7 @@
 
       let primerCentro = null;
       Object.values(data.zonas || {}).forEach(dataZona => {
-        if (!primerCentro && dataZona && typeof dataZona.x === "number") {
+        if (!primerCentro && dataZona && coordenadasAISValidas(dataZona.x, dataZona.y)) {
           primerCentro = [decodeCoord(dataZona.y), decodeCoord(dataZona.x)];
         }
       });
