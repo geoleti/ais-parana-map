@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>PRIHA - Tránsito AIS Paraná</title>
+  <rect width="64" height="64" rx="13" fill="#0f172a"/>
+  <circle cx="32" cy="14" r="5" fill="none" stroke="#eab308" stroke-width="4"/>
+  <path d="M32 20V48M20 30H44" fill="none" stroke="#eab308" stroke-width="5" stroke-linecap="round"/>
+  <path d="M15 39C16 51 23 56 32 56S48 51 49 39M15 39L22 43M49 39L42 43" fill="none" stroke="#eab308" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 58Q12 54 18 58T30 58T42 58T54 58T66 58" fill="none" stroke="#22b8c4" stroke-width="3" stroke-linecap="round"/>
+</svg>
